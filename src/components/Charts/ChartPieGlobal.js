@@ -64,7 +64,7 @@ function ChartPieGlobal({ red, green, orange }) {
           data={data}
           labelLine={false}
           label={renderCustomizedLabel}
-          outerRadius={100}
+          outerRadius={70}
           fill="#8884d8"
           dataKey="value"
         >

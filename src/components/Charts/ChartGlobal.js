@@ -12,7 +12,7 @@ import {
 } from "recharts";
 
 const ChartGlobal = ({ red, green, orange, daily }) => {
-  console.log("orange:", orange);
+  // console.log("orange:", orange);
   return (
     <div className="chart bar-chart">
       <BarChart
