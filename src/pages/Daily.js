@@ -5,12 +5,26 @@ import Col from "react-bootstrap/Col";
 
 import GeoMap from "../components/d3_visualization/GeoMap";
 import Search from "../components/Search";
-import ChartGlobal from "../components/ChartGlobal";
-import ChartPieGlobal from "../components/ChartPieGlobal";
+import ChartGlobal from "../components/Charts/ChartGlobal";
+import ChartPieGlobal from "../components/Charts/ChartPieGlobal";
 import ModalCharts from "../components/Layout/ModalCharts";
 import { data } from "../utils/data";
+import Footer from "../components/Layout/Footer";
+
+import { useCoronaGlobalValues } from "../context";
+import Numbers from "../components/Numbers";
 
 function Daily() {
+  console.log('daily')
+  const {
+    dailyRedTotal,
+    dailyGreenTotal,
+    dailyOrangeTotal,
+    coronaGlobal,
+    coronaGlobalRed,
+    coronaGlobalGreen,
+    lastUpdate
+  } = useCoronaGlobalValues();
   const [show, setShow] = useState(false);
   const [country, setCountry] = useState("");
   const [total, setTotal] = useState(0);
@@ -22,7 +36,6 @@ function Daily() {
   const handleCountry = country => {
     setCountry(country);
   };
-
   const handleTotal = total => setTotal(total);
   return (
     <Fragment>
@@ -41,18 +54,35 @@ function Daily() {
         />
       </Row>
       <Row style={{ marginLeft: "0px", marginRight: "0px" }}>
+        <Numbers
+          orange={dailyOrangeTotal}
+          red={dailyRedTotal}
+          green={dailyGreenTotal}
+        />
+      </Row>
+      <Row style={{ marginLeft: "0px", marginRight: "0px" }}>
         <Col>
           <GeoMap data={data} property={property} />
         </Col>
       </Row>
       <Row style={{ marginLeft: "0px", marginRight: "0px" }}>
         <Col xs={12}>
-          <ChartPieGlobal />
+          <ChartPieGlobal
+            red={dailyRedTotal}
+            green={dailyGreenTotal}
+            orange={dailyOrangeTotal}
+          />
         </Col>
         <Col xs={12}>
-          <ChartGlobal />
+          <ChartGlobal
+            red={coronaGlobalRed}
+            green={coronaGlobalGreen}
+            orange={coronaGlobal}
+            daily={true}
+          />
         </Col>
       </Row>
+      <Footer lastUpdate={lastUpdate} />
     </Fragment>
   );
 }

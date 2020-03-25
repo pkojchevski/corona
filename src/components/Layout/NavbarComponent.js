@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Link } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
@@ -8,12 +8,16 @@ import Nav from "react-bootstrap/Nav";
 function NavbarComponent() {
   return (
     <Navbar bg="light" fixed="bottom">
-      <Nav fill justify className="w-100" defaultActiveKey="/daily">
+      <Nav fill justify className="w-100">
         <Nav.Item>
-          <Link to="/daily">Daily</Link>
+          <NavLink to="/daily" activeClassName="active">
+            Daily
+          </NavLink>
         </Nav.Item>
         <Nav.Item>
-          <Link to="/overall">Overall</Link>
+          <NavLink to="/overall" activeClassName="active">
+            Overall
+          </NavLink>
         </Nav.Item>
       </Nav>
     </Navbar>

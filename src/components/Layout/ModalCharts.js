@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Charts from "../Charts";
+import Charts from "../Charts/Charts";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { useCoronaGlobalValues } from "../../context";

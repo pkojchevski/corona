@@ -1,42 +1,31 @@
 import React, { useState, useEffect } from "react";
 
-import { PieChart, Pie, Sector, Cell } from "recharts";
-import { useCoronaGlobalValues } from "../context";
+import { PieChart, Pie, Sector, Cell, Legend } from "recharts";
 
-function ChartPieGlobal() {
-  const {
-    coronaGlobal,
-    coronaGlobalGreen,
-    coronaGlobalRed,
-    globalTotal,
-    globalGreenTotal,
-    globalRedTotal
-  } = useCoronaGlobalValues();
+function ChartPieGlobal({ red, green, orange }) {
   const [data, setData] = useState([]);
 
   useEffect(() => {
     console.log("piechart");
-    if (globalTotal && globalRedTotal && globalGreenTotal) {
+    if (green && red && orange) {
       setData([
-        {
-          name: "green",
-          value: globalGreenTotal
-        },
+        // {
+        //   name: "green",
+        //   value: green
+        // },
         {
           name: "orange",
-          value: globalTotal
+          value: orange
         },
         {
           name: "red",
-          value: globalRedTotal
+          value: red
         }
       ]);
     }
-  }, [globalTotal, globalGreenTotal, globalRedTotal]);
+  }, [green, red, orange]);
 
-  console.log("data:", data);
-
-  const COLORS = ["green", "orange", "red"];
+  const COLORS = ["orange", "red"];
   const RADIAN = Math.PI / 180;
   const renderCustomizedLabel = ({
     cx,
@@ -63,6 +52,11 @@ function ChartPieGlobal() {
       </text>
     );
   };
+
+  // const renderLegend = () => {
+  //   return <p>Global status.Updated on 21/03/2020 </p>;
+  // };
+
   return (
     <div className="chart pie-chart">
       <PieChart width={300} height={300}>
@@ -70,7 +64,7 @@ function ChartPieGlobal() {
           data={data}
           labelLine={false}
           label={renderCustomizedLabel}
-          outerRadius={110}
+          outerRadius={100}
           fill="#8884d8"
           dataKey="value"
         >

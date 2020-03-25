@@ -6,6 +6,7 @@ import axios from "axios";
 const useCoronaGlobalGreen = () => {
   const [coronaGlobalGreen, setCoronaGlobalGreen] = useState([]);
   const [globalGreenTotal, setGlobalGreenTotal] = useState(0);
+  const [dailyGreenTotal, setDailyGreenTotal] = useState(0);
 
   useEffect(() => {
     console.log("useEffect");
@@ -19,8 +20,12 @@ const useCoronaGlobalGreen = () => {
 
         allData.map(obj => {
           obj.total = +obj[Object.keys(obj)[Object.keys(obj).length - 1]];
+          obj.dailyTotal =
+            +obj[Object.keys(obj)[Object.keys(obj).length - 2]] -
+            +obj[Object.keys(obj)[Object.keys(obj).length - 3]];
           return obj;
         });
+        // console.log(allData);
         if (JSON.stringify(coronaGlobalGreen) !== JSON.stringify(allData)) {
           setCoronaGlobalGreen(allData);
           setGlobalGreenTotal(
@@ -28,13 +33,18 @@ const useCoronaGlobalGreen = () => {
               .map(el => el.total)
               .reduce((acc, val) => acc + (+val || 0), 0)
           );
+
+          setDailyGreenTotal(
+            allData.map(el => el.dailyTotal).reduce((b, a) => b + (+a || 0), 0)
+          );
         }
       })
       .catch(err => console.log("err:", err));
   }, [coronaGlobalGreen]);
   return {
     coronaGlobalGreen,
-    globalGreenTotal
+    globalGreenTotal,
+    dailyGreenTotal
   };
 };
 

@@ -73,13 +73,21 @@ const Search = ({ handleShow, handleCountry, handleTotal }) => {
           .filter(item => item.Country === e.currentTarget.innerText)
           .map(item => item.total)
       );
+      setAutocomplete({ userInput: "" });
     }
     // up arrow
     if (e.keyCode === 38) {
       if (activeSuggestion === 0) {
         return;
       }
+      handleShow();
       setAutocomplete({ activeSuggestion: activeSuggestion - 1 });
+      handleCountry(e.currentTarget.innerText);
+      handleTotal(
+        [...coronaGlobal]
+          .filter(item => item.Country === e.currentTarget.innerText)
+          .map(item => item.total)
+      );
     }
 
     // down arrow
@@ -88,6 +96,13 @@ const Search = ({ handleShow, handleCountry, handleTotal }) => {
         return;
       }
       setAutocomplete({ activeSuggestion: activeSuggestion + 1 });
+      handleShow();
+      handleCountry(e.currentTarget.innerText);
+      handleTotal(
+        [...coronaGlobal]
+          .filter(item => item.Country === e.currentTarget.innerText)
+          .map(item => item.total)
+      );
     }
   };
 

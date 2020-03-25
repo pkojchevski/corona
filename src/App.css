@@ -44,11 +44,11 @@ input {
   border: 1px solid #999;
   border-top-width: 0;
   list-style: none;
-  margin-top: 0;
+  margin-top: -15px;
   max-height: 143px;
   overflow-y: auto;
   padding-left: 0;
-  width: 90vw;
+  width: 100%;
 }
 
 .suggestions li {
@@ -92,9 +92,13 @@ svg .country:hover {
   margin: auto;
 } */
 
+.modal-dialog {
+  margin-top: 52%;
+}
+
 @media (max-width: 375px) {
   .bar-chart {
-    margin-bottom: 5rem;
+    margin-top: -2rem;
   }
 }
 
@@ -102,12 +106,8 @@ svg .country:hover {
   width: 100%;
   display: flex;
   justify-content: space-around;
-  font-size: 1.6rem;
+  font-size: 1.4rem;
   font-weight: bold;
-}
-
-.red {
-  color: red;
 }
 
 .red:after {
@@ -137,4 +137,26 @@ svg .country:hover {
   margin-top: 5px;
   z-index: 100;
   background: orange;
+}
+
+.pie-chart {
+  margin-top: -8rem;
+}
+
+.footer {
+  margin-top: -5px;
+  font-size: 12px;
+  color: #ccc;
+}
+
+a:link,
+a:visited {
+  text-decoration: none;
+}
+
+a.active,
+.active {
+  color: #007bff;
+  font-weight: 500;
+  font-size: 1.15rem;
 }

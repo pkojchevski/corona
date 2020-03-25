@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useCoronaGlobalValues } from "../context";
+import { useCoronaGlobalValues } from "../../context";
 
 import {
   LineChart,
@@ -25,13 +25,7 @@ const HistoryChart = ({ country }) => {
         .map(obj => {
           let history = [];
           Object.keys(obj).map(key => {
-            if (
-              key !== "Country" &&
-              key !== "Province" &&
-              key !== "Lat" &&
-              key !== "Long" &&
-              key !== "total"
-            ) {
+            if (key.includes("date")) {
               history.push({
                 name: key.slice(0, 4),
                 day: key.slice(4, key.length - 1),

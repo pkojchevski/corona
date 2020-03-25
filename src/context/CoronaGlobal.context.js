@@ -13,10 +13,20 @@ export const CoronaGlobalProvider = ({ children }) => {
     coronaGlobal,
     mergedData,
     countries,
-    globalTotal
+    globalTotal,
+    dailyOrangeTotal,
+    lastUpdate
   } = useCoronaGlobal();
-  const { coronaGlobalGreen, globalGreenTotal } = useCoronaGlobalGreen();
-  const { coronaGlobalRed, globalRedTotal } = useCoronaGlobalRed();
+  const {
+    coronaGlobalGreen,
+    globalGreenTotal,
+    dailyGreenTotal
+  } = useCoronaGlobalGreen();
+  const {
+    coronaGlobalRed,
+    globalRedTotal,
+    dailyRedTotal
+  } = useCoronaGlobalRed();
 
   return (
     <CoronaGlobalContext.Provider
@@ -28,7 +38,11 @@ export const CoronaGlobalProvider = ({ children }) => {
         coronaGlobalGreen,
         globalTotal,
         globalGreenTotal,
-        globalRedTotal
+        globalRedTotal,
+        dailyRedTotal,
+        dailyGreenTotal,
+        dailyOrangeTotal,
+        lastUpdate
       }}
     >
       {children}

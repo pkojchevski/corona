@@ -35,7 +35,7 @@ const GeoChart = ({ data, property }) => {
     const projection = geoMercator()
       .fitSize([width, height], selectedCountry || data)
       .precision(200);
-    console.log("mergedData:", mergedData);
+    // console.log("mergedData:", mergedData);
     // take geojson data
     //transforms that into the d attribute of a path element
     const pathGenerator = geoPath().projection(projection);
@@ -54,23 +54,23 @@ const GeoChart = ({ data, property }) => {
       .attr("d", feature => pathGenerator(feature));
 
     // render text
-    svg
-      .selectAll(".label")
-      .data([selectedCountry])
-      .join("text")
-      .attr("class", "label")
-      .text(
-        feature =>
-          feature &&
-          feature.properties.name +
-            ": " +
-            feature.properties.corona.toLocaleString()
-      )
-      .attr("x", 10)
-      .attr("y", 25);
+    // svg
+    //   .selectAll(".label")
+    //   .data([selectedCountry])
+    //   .join("text")
+    //   .attr("class", "label")
+    //   .text(
+    //     feature =>
+    //       feature &&
+    //       feature.properties.name +
+    //         ": " +
+    //         feature.properties.corona.toLocaleString()
+    //   )
+    //   .attr("x", 10)
+    //   .attr("y", 25);
   }, [data, dimensions, property, selectedCountry, mergedData]);
   return (
-    <div ref={wrapperRef} style={{ marginTop: "4rem" }}>
+    <div ref={wrapperRef} style={{ marginTop: "1rem" }}>
       <svg className="svg-map" ref={svgRef}></svg>
     </div>
   );

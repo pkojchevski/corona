@@ -10,19 +10,21 @@ import {
   Tooltip,
   LabelList
 } from "recharts";
-import { useCoronaGlobalValues } from "../context";
 
-const ChartGlobal = () => {
-  const { coronaGlobal } = useCoronaGlobalValues();
-  const ticks = [0, 20, 40, 60, 80, 100, 120, 140, 160, 180];
+const ChartGlobal = ({ red, green, orange, daily }) => {
+  console.log("orange:", orange);
   return (
     <div className="chart bar-chart">
       <BarChart
         width={350}
-        height={300}
+        height={200}
         data={
-          coronaGlobal &&
-          [...coronaGlobal].sort((a, b) => b.total - a.total).splice(0, 10)
+          orange &&
+          [...orange]
+            .sort((a, b) =>
+              daily ? +b.dailyTotal - +a.dailyTotal : +b.total - +a.total
+            )
+            .splice(0, 10)
         }
       >
         <CartesianGrid strokeDasharray="5 5" />
@@ -35,8 +37,11 @@ const ChartGlobal = () => {
           tick={{ fontSize: 12 }}
         />
         <Tooltip />
-        <Bar dataKey="total" fill="#8884d8" />
-        {/* <LabelList dataKey="total" position="top" /> */}
+        {daily ? (
+          <Bar dataKey="dailyTotal" fill="orange" />
+        ) : (
+          <Bar dataKey="total" fill="orange" />
+        )}
       </BarChart>
     </div>
   );

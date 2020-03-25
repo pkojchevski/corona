@@ -5,13 +5,26 @@ import Col from "react-bootstrap/Col";
 
 import GeoMap from "../components/d3_visualization/GeoMap";
 import Search from "../components/Search";
-import ChartGlobal from "../components/ChartGlobal";
-import ChartPieGlobal from "../components/ChartPieGlobal";
+import ChartGlobal from "../components/Charts/ChartGlobal";
+import ChartPieGlobal from "../components/Charts/ChartPieGlobal";
 import ModalCharts from "../components/Layout/ModalCharts";
 import { data } from "../utils/data";
 import Numbers from "../components/Numbers";
+import Footer from "../components/Layout/Footer";
+
+import { useCoronaGlobalValues } from "../context";
 
 function Overall() {
+  console.log("overall");
+  const {
+    coronaGlobal,
+    coronaGlobalRed,
+    coronaGlobalGreen,
+    globalTotal,
+    globalRedTotal,
+    globalGreenTotal,
+    lastUpdate
+  } = useCoronaGlobalValues();
   const [show, setShow] = useState(false);
   const [country, setCountry] = useState("");
   const [total, setTotal] = useState(0);
@@ -42,7 +55,11 @@ function Overall() {
         />
       </Row>
       <Row style={{ marginLeft: "0px", marginRight: "0px" }}>
-        <Numbers />
+        <Numbers
+          red={globalRedTotal}
+          orange={globalTotal}
+          green={globalGreenTotal}
+        />
       </Row>
       <Row style={{ marginLeft: "0px", marginRight: "0px" }}>
         <Col>
@@ -51,12 +68,22 @@ function Overall() {
       </Row>
       <Row style={{ marginLeft: "0px", marginRight: "0px" }}>
         <Col xs={12}>
-          <ChartPieGlobal />
+          <ChartPieGlobal
+            red={globalRedTotal}
+            orange={globalTotal}
+            green={globalGreenTotal}
+          />
         </Col>
         <Col xs={12}>
-          <ChartGlobal />
+          <ChartGlobal
+            daily={false}
+            red={coronaGlobalRed}
+            orange={coronaGlobal}
+            green={coronaGlobalGreen}
+          />
         </Col>
       </Row>
+      <Footer lastUpdate={lastUpdate} />
     </Fragment>
   );
 }

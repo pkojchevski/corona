@@ -12,8 +12,9 @@ const Content = () => {
     <Container style={{ paddingRight: 0, paddingLeft: 0 }}>
       <NavbarComponent />
       <Switch>
-        <Route path="/daily" component={Daily}></Route>
-        <Route path="/overall" component={Overall}></Route>
+        <Route exact path="/" component={Daily}></Route>
+        <Route exact path="/daily" component={Daily}></Route>
+        <Route exact path="/overall" component={Overall}></Route>
       </Switch>
     </Container>
   );
