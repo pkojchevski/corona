@@ -1,11 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Charts from "../Charts/Charts";
-import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
-import { useCoronaGlobalValues } from "../../context";
+import "odometer/themes/odometer-theme-train-station.css";
+import Footer from "../Layout/Footer";
 
-const ModalCharts = ({ show, country, handleClose, total }) => {
-  
+const ModalCharts = ({
+  orange,
+  show,
+  country,
+  handleClose,
+  daily,
+  lastUpdate,
+  total
+}) => {
   return (
     <Modal show={show} onHide={handleClose}>
       <Modal.Header closeButton>
@@ -16,6 +23,7 @@ const ModalCharts = ({ show, country, handleClose, total }) => {
       <Modal.Body style={{ marginLeft: "-2rem" }}>
         <Charts country={country} />
       </Modal.Body>
+      <Footer lastUpdate={lastUpdate} />
     </Modal>
   );
 };

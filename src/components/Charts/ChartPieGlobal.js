@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-import { PieChart, Pie, Sector, Cell, Legend } from "recharts";
+import { PieChart, Pie, Cell } from "recharts";
 
 function ChartPieGlobal({ red, green, orange }) {
   const [data, setData] = useState([]);
@@ -9,10 +9,10 @@ function ChartPieGlobal({ red, green, orange }) {
     console.log("piechart");
     if (green && red && orange) {
       setData([
-        // {
-        //   name: "green",
-        //   value: green
-        // },
+        {
+          name: "green",
+          value: green
+        },
         {
           name: "orange",
           value: orange
@@ -25,7 +25,7 @@ function ChartPieGlobal({ red, green, orange }) {
     }
   }, [green, red, orange]);
 
-  const COLORS = ["orange", "red"];
+  const COLORS = ["green", "orange", "red"];
   const RADIAN = Math.PI / 180;
   const renderCustomizedLabel = ({
     cx,
@@ -33,8 +33,7 @@ function ChartPieGlobal({ red, green, orange }) {
     midAngle,
     innerRadius,
     outerRadius,
-    percent,
-    index
+    percent
   }) => {
     const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
     const x = cx + radius * Math.cos(-midAngle * RADIAN);

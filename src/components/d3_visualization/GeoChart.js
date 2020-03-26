@@ -1,13 +1,5 @@
 import React, { useRef, useEffect, useState } from "react";
-import {
-  select,
-  geoPath,
-  geoMercator,
-  min,
-  max,
-  scaleLinear,
-  scaleOrdinal
-} from "d3";
+import { select, geoPath, geoMercator, min, max, scaleOrdinal } from "d3";
 import useResizeObserver from "./userResizeObserver";
 import { useCoronaGlobalValues } from "../../context";
 
@@ -45,9 +37,9 @@ const GeoChart = ({ data, property }) => {
       .selectAll(".country")
       .data(mergedData)
       .join("path")
-      .on("click", feature => {
-        setSelectedCountry(selectedCountry === feature ? null : feature);
-      })
+      // .on("click", feature => {
+      //   setSelectedCountry(selectedCountry === feature ? null : feature);
+      // })
       .attr("class", "country")
       .transition()
       .attr("fill", feature => colorScale(feature.properties.corona))
@@ -59,6 +51,7 @@ const GeoChart = ({ data, property }) => {
     //   .data([selectedCountry])
     //   .join("text")
     //   .attr("class", "label")
+    //   .style("transform", "translate(50%, 50%)")
     //   .text(
     //     feature =>
     //       feature &&
@@ -67,7 +60,9 @@ const GeoChart = ({ data, property }) => {
     //         feature.properties.corona.toLocaleString()
     //   )
     //   .attr("x", 10)
-    //   .attr("y", 25);
+    //   .attr("y", 25)
+    //   .selectAll(".country")
+    //   .attr("fill", "white");
   }, [data, dimensions, property, selectedCountry, mergedData]);
   return (
     <div ref={wrapperRef} style={{ marginTop: "1rem" }}>

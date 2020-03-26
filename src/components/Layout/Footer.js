@@ -1,12 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 
 function Footer({ lastUpdate }) {
   return (
     <footer className="footer">
       {lastUpdate && (
         <p className="text-center">
-          Last update:
-          <cite>{lastUpdate.substring(4, lastUpdate.length - 1)}</cite>
+          <cite>Last update: {lastUpdate.substring(4, lastUpdate.length)}</cite>
         </p>
       )}
     </footer>

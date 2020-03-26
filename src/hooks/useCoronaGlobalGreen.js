@@ -12,10 +12,9 @@ const useCoronaGlobalGreen = () => {
     console.log("useEffect");
     axios
       .get(
-        "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_19-covid-Recovered.csv"
+        "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_recovered_global.csv"
       )
       .then(res => {
-        let merge = [];
         const allData = sumCountryQty([...csvJSON(res.data)]);
 
         allData.map(obj => {

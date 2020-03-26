@@ -15,7 +15,7 @@ import { useCoronaGlobalValues } from "../context";
 import Numbers from "../components/Numbers";
 
 function Daily() {
-  console.log('daily')
+  console.log("daily");
   const {
     dailyRedTotal,
     dailyGreenTotal,
@@ -44,6 +44,8 @@ function Daily() {
         handleClose={handleClose}
         country={country}
         total={total}
+        daily={true}
+        orange={coronaGlobal}
       />
       <Row style={{ marginLeft: "0px", marginRight: "0px" }}>
         <Search
