@@ -32,7 +32,7 @@ const ChartGlobal = ({ red, green, orange, daily }) => {
             }
             layout={"vertical"}
           >
-            <CartesianGrid strokeDasharray="5 5" />
+            <CartesianGrid strokeDasharray="4 4" />
 
             <XAxis
               // dataKey="dailyTotal"
@@ -49,23 +49,39 @@ const ChartGlobal = ({ red, green, orange, daily }) => {
               orientation={"left"}
               dataKey="Country"
               tick={{ fontSize: 10 }}
+              interval={0}
             />
             <Tooltip />
             {daily ? (
-              <Bar dataKey="dailyTotal" fill="orange">
+              <Bar isAnimationActive={false} dataKey="dailyTotal" fill="orange">
                 <LabelList
                   dataKey="dailyTotal"
                   position="center"
+                  textAnchor="end"
                   // angle={90}
                   style={{
-                    fontSize: 10,
-                    textAlign: "center",
-                    fontWeight: "bold"
+                    fontSize: 12,
+                    fontWeight: "bold",
+                    transform: "translate(20px)"
                   }}
+                  reverse
                 />
               </Bar>
             ) : (
-              <Bar dataKey="total" fill="orange" />
+              <Bar isAnimationActive={false} dataKey="total" fill="orange">
+                <LabelList
+                  dataKey="dailyTotal"
+                  position="center"
+                  textAnchor="end"
+                  // angle={90}
+                  style={{
+                    fontSize: 12,
+                    fontWeight: "bold",
+                    transform: "translate(20px)"
+                  }}
+                  reverse
+                />
+              </Bar>
             )}
           </BarChart>
         </ResponsiveContainer>

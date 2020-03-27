@@ -45,6 +45,19 @@ function Overall() {
         handleClose={handleClose}
         country={country}
         total={total}
+        lastUpdate={lastUpdate}
+        orange={
+          coronaGlobal.length > 0 &&
+          coronaGlobal.filter(el => el.Country === country)[0]
+        }
+        red={
+          coronaGlobalRed.length > 0 &&
+          coronaGlobalRed.filter(el => el.Country === country)[0]
+        }
+        green={
+          coronaGlobalGreen.length > 0 &&
+          coronaGlobalGreen.filter(el => el.Country === country)[0]
+        }
       />
       <Row style={{ marginLeft: "0px", marginRight: "0px" }}>
         <Search

@@ -14,6 +14,8 @@ import Footer from "../components/Layout/Footer";
 import { useCoronaGlobalValues } from "../context";
 import Numbers from "../components/Numbers";
 
+import Spinner from "../components/Layout/Spinner";
+
 function Daily() {
   console.log("daily");
   const {
@@ -40,12 +42,24 @@ function Daily() {
   return (
     <Fragment>
       <ModalCharts
+        lastUpdate={lastUpdate}
         show={show}
         handleClose={handleClose}
         country={country}
         total={total}
         daily={true}
-        orange={coronaGlobal}
+        orange={
+          coronaGlobal.length > 0 &&
+          coronaGlobal.filter(el => el.Country === country)[0]
+        }
+        red={
+          coronaGlobalRed.length > 0 &&
+          coronaGlobalRed.filter(el => el.Country === country)[0]
+        }
+        green={
+          coronaGlobalGreen.length > 0 &&
+          coronaGlobalGreen.filter(el => el.Country === country)[0]
+        }
       />
       <Row style={{ marginLeft: "0px", marginRight: "0px" }}>
         <Search
@@ -75,14 +89,14 @@ function Daily() {
             orange={dailyOrangeTotal}
           />
         </Col>
-        <Col xs={12}>
-          <ChartGlobal
-            red={coronaGlobalRed}
-            green={coronaGlobalGreen}
-            orange={coronaGlobal}
-            daily={true}
-          />
-        </Col>
+          <Col xs={12}>
+            <ChartGlobal
+              red={coronaGlobalRed}
+              green={coronaGlobalGreen}
+              orange={coronaGlobal}
+              daily={true}
+            />
+          </Col>
       </Row>
       <Footer lastUpdate={lastUpdate} />
     </Fragment>

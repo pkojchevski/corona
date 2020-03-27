@@ -151,7 +151,7 @@ const Search = ({ handleShow, handleCountry, handleTotal }) => {
           </InputGroup.Text>
         </InputGroup.Prepend>
         <FormControl
-          placeholder="Search..."
+          placeholder="Search Countries..."
           aria-label="Search"
           onChange={onChange}
           onKeyDown={onKeyDown}
