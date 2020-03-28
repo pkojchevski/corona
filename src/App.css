@@ -92,9 +92,9 @@ svg .country:hover {
   margin: auto;
 } */
 
-.modal-dialog {
+/* .modal-dialog {
   margin-top: 52%;
-}
+} */
 
 @media (max-width: 375px) {
   .bar-chart {

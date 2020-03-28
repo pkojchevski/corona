@@ -54,40 +54,41 @@ const Search = ({ handleShow, handleCountry, handleTotal }) => {
         .filter(item => item.Country === e.currentTarget.innerText)
         .map(item => item.total)
     );
+    setTimeout(() => {
+      setAutocomplete({ userInput: "" });
+    }, 500);
   };
 
   const onKeyDown = e => {
     const { activeSuggestion, filteredSuggestions } = autocomplete;
 
     // enter
-    if (e.keyCode == 13) {
+    if (e.keyCode === 13) {
       setAutocomplete({
         activeSuggestion: 0,
         showSuggestions: false,
         userInput: filteredSuggestions[activeSuggestion]
       });
       handleShow();
-      handleCountry(e.currentTarget.innerText);
+      handleCountry(filteredSuggestions[activeSuggestion]);
       handleTotal(
         [...coronaGlobal]
           .filter(item => item.Country === e.currentTarget.innerText)
           .map(item => item.total)
       );
-      setAutocomplete({ userInput: "" });
+      setTimeout(() => {
+        setAutocomplete({ userInput: "" });
+      }, 500);
     }
     // up arrow
     if (e.keyCode === 38) {
       if (activeSuggestion === 0) {
         return;
       }
-      handleShow();
-      setAutocomplete({ activeSuggestion: activeSuggestion - 1 });
-      handleCountry(e.currentTarget.innerText);
-      handleTotal(
-        [...coronaGlobal]
-          .filter(item => item.Country === e.currentTarget.innerText)
-          .map(item => item.total)
-      );
+      setAutocomplete({
+        ...autocomplete,
+        activeSuggestion: activeSuggestion - 1
+      });
     }
 
     // down arrow
@@ -95,14 +96,10 @@ const Search = ({ handleShow, handleCountry, handleTotal }) => {
       if (activeSuggestion - 1 === filteredSuggestions.length) {
         return;
       }
-      setAutocomplete({ activeSuggestion: activeSuggestion + 1 });
-      handleShow();
-      handleCountry(e.currentTarget.innerText);
-      handleTotal(
-        [...coronaGlobal]
-          .filter(item => item.Country === e.currentTarget.innerText)
-          .map(item => item.total)
-      );
+      setAutocomplete({
+        ...autocomplete,
+        activeSuggestion: activeSuggestion + 1
+      });
     }
   };
 

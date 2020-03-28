@@ -26,9 +26,9 @@ const ModalCharts = ({
       setRedTotal(red && red.dailyTotal);
       setGreenTotal(green && green.dailyTotal);
     } else {
-      setGreenTotal(green && green.dailyTotal);
-      setOrangeTotal(orange && orange.dailyTotal);
-      setRedTotal(red && red.dailyTotal);
+      setGreenTotal(green && green.total);
+      setOrangeTotal(orange && orange.total);
+      setRedTotal(red && red.total);
     }
   }, [orange, red, green]);
   return (

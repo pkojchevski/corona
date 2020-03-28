@@ -31,7 +31,9 @@ function Daily() {
   const [country, setCountry] = useState("");
   const [total, setTotal] = useState(0);
   const [property, setProperty] = useState("pop_est");
-  const handleClose = () => setShow(false);
+  const handleClose = () => {
+    setShow(false)
+  };
   const handleShow = () => {
     setShow(true);
   };
