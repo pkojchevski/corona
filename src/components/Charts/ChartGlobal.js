@@ -28,7 +28,7 @@ const ChartGlobal = ({ red, green, orange, daily }) => {
                 .sort((a, b) =>
                   daily ? +b.dailyTotal - +a.dailyTotal : +b.total - +a.total
                 )
-                .filter(el => +el.dailyTotal > 10)
+                .filter(el => (daily ? +el.dailyTotal > 10 : +el.total > 10))
             }
             layout={"vertical"}
           >
@@ -70,7 +70,7 @@ const ChartGlobal = ({ red, green, orange, daily }) => {
             ) : (
               <Bar isAnimationActive={false} dataKey="total" fill="orange">
                 <LabelList
-                  dataKey="dailyTotal"
+                  dataKey="total"
                   position="center"
                   textAnchor="end"
                   // angle={90}
