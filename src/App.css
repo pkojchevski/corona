@@ -106,7 +106,7 @@ svg .country:hover {
   width: 100%;
   display: flex;
   justify-content: space-around;
-  font-size: 1.4rem;
+  /* font-size: 1.4rem; */
   font-weight: bold;
 }
 

@@ -5,10 +5,12 @@ import App from "./App";
 import ServiceWorkerWrapper from "./ServiceWorkerWrapper";
 // import * as serviceWorker from "./serviceWorker";
 import { BrowserRouter } from "react-router-dom";
+import MissingNet from "./components/Layout/MissingNet";
 
 ReactDOM.render(
   <BrowserRouter>
     <ServiceWorkerWrapper />
+    <MissingNet />
     <App />
   </BrowserRouter>,
   document.getElementById("root")

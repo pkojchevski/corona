@@ -7,7 +7,7 @@ const ServiceWorkerWrapper = () => {
   const [showReload, setShowReload] = useState(false);
   const [waitingWorker, setWaitingWorker] = useState(null);
 
-  const onSWUpdate = registration => {
+  const onSWUpdate = (registration) => {
     setShowReload(true);
     setWaitingWorker(registration.waiting);
   };
@@ -25,7 +25,7 @@ const ServiceWorkerWrapper = () => {
   return (
     <Snackbar
       open={showReload}
-      message="A new version is available!"
+      message="A new app version is available!"
       onClick={reloadPage}
       anchorOrigin={{ vertical: "top", horizontal: "center" }}
       action={
