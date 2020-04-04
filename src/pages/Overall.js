@@ -11,6 +11,7 @@ import ModalCharts from "../components/Layout/ModalCharts";
 import { data } from "../utils/data";
 import Numbers from "../components/Numbers";
 import Footer from "../components/Layout/Footer";
+import Spinner from "../components/Layout/Spinner";
 
 import { useCoronaGlobalValues } from "../context";
 
@@ -74,28 +75,34 @@ function Overall() {
           green={globalGreenTotal}
         />
       </Row>
-      <Row style={{ marginLeft: "0px", marginRight: "0px" }}>
-        <Col>
-          <GeoMap data={data} property={property} />
-        </Col>
-      </Row>
-      <Row style={{ marginLeft: "0px", marginRight: "0px" }}>
-        <Col xs={12}>
-          <ChartPieGlobal
-            red={globalRedTotal}
-            orange={globalTotal}
-            green={globalGreenTotal}
-          />
-        </Col>
-        <Col xs={12}>
-          <ChartGlobal
-            daily={false}
-            red={coronaGlobalRed}
-            orange={coronaGlobal}
-            green={coronaGlobalGreen}
-          />
-        </Col>
-      </Row>
+      {coronaGlobal.length === 0 ? (
+        <Spinner />
+      ) : (
+        <Fragment>
+          <Row style={{ marginLeft: "0px", marginRight: "0px" }}>
+            <Col>
+              <GeoMap data={data} property={property} />
+            </Col>
+          </Row>
+          <Row style={{ marginLeft: "0px", marginRight: "0px" }}>
+            <Col xs={12}>
+              <ChartPieGlobal
+                red={globalRedTotal}
+                orange={globalTotal}
+                green={globalGreenTotal}
+              />
+            </Col>
+            <Col xs={12}>
+              <ChartGlobal
+                daily={false}
+                red={coronaGlobalRed}
+                orange={coronaGlobal}
+                green={coronaGlobalGreen}
+              />
+            </Col>
+          </Row>
+        </Fragment>
+      )}
       <Footer lastUpdate={lastUpdate} />
     </Fragment>
   );

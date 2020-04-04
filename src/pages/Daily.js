@@ -17,7 +17,7 @@ import Numbers from "../components/Numbers";
 import Spinner from "../components/Layout/Spinner";
 
 function Daily() {
-  console.log("daily");
+  // console.log("daily");
   const {
     dailyRedTotal,
     dailyGreenTotal,
@@ -32,7 +32,7 @@ function Daily() {
   const [total, setTotal] = useState(0);
   const [property, setProperty] = useState("pop_est");
   const handleClose = () => {
-    setShow(false)
+    setShow(false);
   };
   const handleShow = () => {
     setShow(true);
@@ -41,6 +41,8 @@ function Daily() {
     setCountry(country);
   };
   const handleTotal = total => setTotal(total);
+
+  // console.log("coronaGlobal:", coronaGlobal);
   return (
     <Fragment>
       <ModalCharts
@@ -78,29 +80,35 @@ function Daily() {
           green={dailyGreenTotal}
         />
       </Row>
-      <Row style={{ marginLeft: "0px", marginRight: "0px" }}>
-        <Col>
-          <GeoMap data={data} property={property} />
-        </Col>
-      </Row>
-      <Row style={{ marginLeft: "0px", marginRight: "0px" }}>
-        <Col xs={12}>
-          <ChartPieGlobal
-            red={dailyRedTotal}
-            green={dailyGreenTotal}
-            orange={dailyOrangeTotal}
-          />
-        </Col>
-          <Col xs={12}>
-            <ChartGlobal
-              red={coronaGlobalRed}
-              green={coronaGlobalGreen}
-              orange={coronaGlobal}
-              daily={true}
-            />
-          </Col>
-      </Row>
-      <Footer lastUpdate={lastUpdate} />
+      {coronaGlobal.length === 0 ? (
+        <Spinner />
+      ) : (
+        <Fragment>
+          <Row style={{ marginLeft: "0px", marginRight: "0px" }}>
+            <Col>
+              <GeoMap data={data} property={property} />
+            </Col>
+          </Row>
+          <Row style={{ marginLeft: "0px", marginRight: "0px" }}>
+            <Col xs={12}>
+              <ChartPieGlobal
+                red={dailyRedTotal}
+                green={dailyGreenTotal}
+                orange={dailyOrangeTotal}
+              />
+            </Col>
+            <Col xs={12}>
+              <ChartGlobal
+                red={coronaGlobalRed}
+                green={coronaGlobalGreen}
+                orange={coronaGlobal}
+                daily={true}
+              />
+            </Col>
+          </Row>
+          <Footer lastUpdate={lastUpdate} />
+        </Fragment>
+      )}
     </Fragment>
   );
 }

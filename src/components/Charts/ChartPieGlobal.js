@@ -6,7 +6,7 @@ function ChartPieGlobal({ red, green, orange }) {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    console.log("piechart");
+    // console.log("piechart");
     if (green && red && orange) {
       setData([
         {

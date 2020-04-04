@@ -14,7 +14,7 @@ const useCoronaGlobal = () => {
   const [lastUpdate, setLastUpdate] = useState(null);
 
   useEffect(() => {
-    console.log("useEffect");
+    // console.log("useEffect");
     axios
       .get(
         "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv"
@@ -48,7 +48,7 @@ const useCoronaGlobal = () => {
         // console.log("merge:", merge);
         // console.log("allData:", allData);
         if (JSON.stringify(coronaGlobal) !== JSON.stringify(allData)) {
-          console.log("update from hooks");
+          // console.log("update from hooks");
           setCoronaGlobal(allData);
           setLastUpdate(allData.map(el => el.lastUpdate)[1]);
           setCountries(allData.map(el => el.Country));

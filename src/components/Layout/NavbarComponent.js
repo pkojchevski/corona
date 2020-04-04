@@ -6,7 +6,7 @@ import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 
 function NavbarComponent({ location }) {
-  console.log("location:", location);
+  // console.log("location:", location);
   return (
     <Navbar bg="light" fixed="bottom">
       <Nav fill justify className="w-100">

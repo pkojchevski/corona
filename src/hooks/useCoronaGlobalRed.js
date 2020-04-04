@@ -9,7 +9,7 @@ const useCoronaGlobalRed = () => {
   const [dailyRedTotal, setDailyRedTotal] = useState(0);
 
   useEffect(() => {
-    console.log("useEffect");
+    // console.log("useEffect");
     axios
       .get(
         "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv"
@@ -27,7 +27,7 @@ const useCoronaGlobalRed = () => {
         // console.log("merge:", merge);
         // console.log("allData:", allData);
         if (JSON.stringify(coronaGlobalRed) !== JSON.stringify(allData)) {
-          console.log("update from hooks");
+          // console.log("update from hooks");
           setCoronaGlobalRed(allData);
           setGlobalRedTotal(
             allData
