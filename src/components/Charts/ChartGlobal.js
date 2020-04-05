@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   BarChart,
   Bar,
@@ -7,40 +7,53 @@ import {
   YAxis,
   CartesianGrid,
   Tooltip,
-  LabelList
+  LabelList,
 } from "recharts";
 
 const ChartGlobal = ({ red, green, orange, daily }) => {
+  const [final, setFinal] = useState([]);
+  useEffect(() => {
+    let arr = [];
+    if (red && orange && red.length > 0 && orange.length > 0) {
+      for (let i = 0; i < orange.length; i++) {
+        arr.push({
+          Country: orange[i].Country,
+          totalOrange: orange[i].total,
+          dailyTotalOrange: orange[i].dailyTotal,
+          totalRed: red[i].total,
+          dailyTotalRed: red[i].dailyTotal,
+        });
+      }
+      setFinal(arr);
+    }
+  }, [red, orange]);
   return (
     <div className="chart bar-chart">
-      {orange.length !== 0 && (
+      {final.length !== 0 && daily && (
         <ResponsiveContainer
           width="100%"
-          height={orange.length * 20 + 50}
-          // style={{ minHeight: "500px" }}
-          // aspect={3.0 / 3.0}
-          // height='1000px'
+          height={orange.length * 30 + 100}
         >
           <BarChart
             data={
-              orange &&
-              [...orange]
+              final.length > 0 &&
+              final
                 .sort((a, b) =>
-                  daily ? +b.dailyTotal - +a.dailyTotal : +b.total - +a.total
+                  +b.dailyTotalOrange - +a.dailyTotalOrange
                 )
-                .filter(el => (daily ? +el.dailyTotal > 10 : +el.total > 10))
+                .filter((el) =>
+                  +el.dailyTotalOrange > 10
+                )
             }
             layout={"vertical"}
           >
             <CartesianGrid strokeDasharray="4 4" />
-
             <XAxis
-              // dataKey="dailyTotal"
               interval={0}
               tick={{ fontSize: 12 }}
               type={"number"}
               orientation={"top"}
-              // label={{ value: "pv of page", angle: -90, position: "insideLeft" }}
+              domain={['dataMin', 'dataMax']}
             />
             <YAxis
               angle={-45}
@@ -51,38 +64,116 @@ const ChartGlobal = ({ red, green, orange, daily }) => {
               tick={{ fontSize: 10 }}
               interval={0}
             />
-            <Tooltip />
-            {daily ? (
-              <Bar isAnimationActive={false} dataKey="dailyTotal" fill="orange">
-                <LabelList
-                  dataKey="dailyTotal"
-                  position="center"
-                  textAnchor="end"
-                  // angle={90}
-                  style={{
-                    fontSize: 12,
-                    fontWeight: "bold",
-                    transform: "translate(20px)"
-                  }}
-                  reverse
-                />
-              </Bar>
-            ) : (
-              <Bar isAnimationActive={false} dataKey="total" fill="orange">
-                <LabelList
-                  dataKey="total"
-                  position="center"
-                  textAnchor="end"
-                  // angle={90}
-                  style={{
-                    fontSize: 12,
-                    fontWeight: "bold",
-                    transform: "translate(20px)"
-                  }}
-                  reverse
-                />
-              </Bar>
-            )}
+            {/* <Tooltip /> */}
+            <Bar
+              isAnimationActive={false}
+              dataKey="dailyTotalOrange"
+              fill="orange"
+            >
+              <LabelList
+                dataKey="dailyTotalOrange"
+                position="center"
+                textAnchor="end"
+                style={{
+                  fontSize: 12,
+                  fontWeight: "bold",
+                  transform: "translate(20px)",
+                }}
+                reverse
+              />
+            </Bar>
+            <Bar
+              isAnimationActive={false}
+              dataKey="dailyTotalRed"
+              fill="red"
+            >
+              <LabelList
+                dataKey="dailyTotalRed"
+                position="center"
+                textAnchor="end"
+                style={{
+                  fontSize: 12,
+                  fontWeight: "bold",
+                  transform: "translate(20px)",
+                }}
+                reverse
+              />
+
+            </Bar>
+          </BarChart>
+        </ResponsiveContainer>
+      )}
+      {final.length !== 0 && !daily && (
+        <ResponsiveContainer
+          width="100%"
+          height={final.length * 30 + 100}
+        >
+          <BarChart
+            data={
+              final.length > 0 &&
+              final
+                .sort((a, b) =>
+                  +b.totalOrange - +a.totalOrange
+                )
+                .filter((el) =>
+                  +el.totalOrange > 10
+                )
+            }
+            layout={"vertical"}
+          >
+            <CartesianGrid strokeDasharray="4 4" />
+            <XAxis
+              interval={0}
+              tick={{ fontSize: 12 }}
+              type={"number"}
+              orientation={"top"}
+              domain={['dataMin', 'dataMax']}
+            />
+            <YAxis
+              angle={-45}
+              textAnchor="end"
+              type={"category"}
+              orientation={"left"}
+              dataKey="Country"
+              tick={{ fontSize: 10 }}
+              interval={0}
+            />
+            {/* <Tooltip /> */}
+            <Bar
+              isAnimationActive={false}
+              dataKey="totalOrange"
+              fill="orange"
+            >
+              <LabelList
+                dataKey="totalOrange"
+                position="center"
+                textAnchor="end"
+                style={{
+                  fontSize: 12,
+                  fontWeight: "bold",
+                  transform: "translate(20px)",
+                }}
+                reverse
+              />
+            </Bar>
+            <Bar
+              isAnimationActive={false}
+              dataKey="totalRed"
+              fill="red"
+            >
+              <LabelList
+                dataKey="totalRed"
+                position="center"
+                textAnchor="end"
+                style={{
+                  fontSize: 12,
+                  fontWeight: "bold",
+                  transform: "translate(20px)",
+                }}
+                reverse
+              />
+
+            </Bar>
           </BarChart>
         </ResponsiveContainer>
       )}
