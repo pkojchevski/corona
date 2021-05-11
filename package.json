@@ -9,7 +9,7 @@
     "bootstrap": "^4.4.1",
     "cra-template": "1.0.2",
     "d3": "^5.15.0",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.21",
     "papaparse": "^5.1.1",
     "react": "^16.13.0",
     "react-app-rewired": "^2.1.5",
